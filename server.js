@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
 	password : 'cos221_prac3_pw',
 	database : 'elections'
 });
-
+//this is my comment
 var app = express();
 
 // set the view engine to ejs
