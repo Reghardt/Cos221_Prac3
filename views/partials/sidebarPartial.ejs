@@ -1,0 +1,44 @@
+<meta charset="UTF-8">
+<title>EJS Is Fun</title>
+
+<!-- This is to allow materialize css -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- End of materialize css needed files -->
+<!-- SideBar css -->
+<link rel="stylesheet" href="css/sidebar.css">
+</style>
+
+
+<!-- Sidebar where links to interact with the application are -->
+<ul id="slide-out" class="sidenav sidenav-fixed">
+    <li><div class="user-view">
+      <div class="background">
+        <img src="images/office.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+      <a href="#name"><span class="white-text name">John Doe</span></a>
+      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div></li>
+    <!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li> -->
+    <li><div class="divider"></div></li>
+    <li><a href="registerStaff.html">Register staff</a></li>
+    <li><a href="registerCandidate.html">Register Candidate</a></li>
+    <li><a href="registerParty.html">Register Party</a></li>
+    <li><a href="registerVoter.html">Register Voter</a></li>
+    <li><a class="subheader">Others</a></li>
+    <li><a href="updateDistrict.html">Update voting district</a></li>
+    <li><a>Log out</a></li>
+</ul>
+  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">show menu</i></a>
+
+  <script>
+      // script to initalize sidebar
+       document.addEventListener('DOMContentLoaded', function() {
+          var elems = document.querySelectorAll('.sidenav');
+          var instances = M.Sidenav.init(elems, "edge");
+      });
+      // var instance = M.Sidenav.getInstance(elems);
+  </script>
