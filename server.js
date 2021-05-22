@@ -81,6 +81,11 @@ app.get('/home', function(request, response) {
 });
 
 
+ // about page
+ app.get('/sidebar', function(req, res) {
+    res.render('pages/sidebar');
+  });
+
 
 app.get('/register', function (req, res) {
     res.render('pages/register');
