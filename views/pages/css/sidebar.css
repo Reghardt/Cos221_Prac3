@@ -1,0 +1,24 @@
+ /*Style to offset content when navbar is on display*/
+ .container, .header, .main, .footer {
+    padding-left: 300px;
+  }
+
+  @media only screen and (max-width : 992px) {
+    .container, .header, .main, .footer {
+      padding-left: 0;
+    }
+  }
+
+
+
+  .sidenav{
+    background-color:#DE354C;
+  }
+
+  .nav-link{
+    color:#fff;
+  }
+
+  .user-view{
+    background-color: brown;
+  }
