@@ -15,6 +15,7 @@ var connection = mysql.createConnection({
 	database : 'elections'
 });
 // This is test comment
+//this is my comment
 var app = express();
 
 // set the view engine to ejs
