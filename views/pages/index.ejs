@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <div class="container">
+        <h2>Login:</h2>
+        <form action="auth" method="POST">
+          <div class="form-group">
+            <label for="username">Email:</label>
+            <input type="username" class="form-control"  placeholder="Enter username" name="username">
+          </div>
+          <div class="form-group">
+            <label for="pasword">Password:</label>
+            <input type="password" class="form-control" placeholder="Enter password" name="password">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+          </div>
+          <div>
+            <select class="form-control" id="sel1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+          </div>
+          <button type="submit" class="btn btn-info">Submit</button>
+          <div></div><br>
+          <a href="/register" class="btn btn-info" role="button">Register</a>
+        </form>
+      </div>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
