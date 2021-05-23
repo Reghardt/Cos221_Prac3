@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Voter</title>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<style>
+  body{
+    background-color: #385B93;
+  }
+
+    form input[type=text]{
+      color:#fff;
+    }
+  /* Change address link on hover */
+  .changeAddLink {
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h4 style="color: #fff;"><b>Welcome VoterName</b></h4>
+  <ul class="collection">
+    <li class="collection-item avatar">
+      <span class="title">Voter name & Surname</span>
+      <p><b>Voter status:</b> Not voted</p>
+      <a class="changeAddLink" onclick="toggle()"> Change address</a>
+      <br>
+      <a href="/ballot"> Cast Vote</a>
+      <br>
+      <a href="#"> log out</a>
+    </li>
+  </ul>
+
+  <!-- Form to allow change of address -->
+  <form action="#" id ="form" style="display: none;">
+    <label for="address"><b>Address:</b></label><br>
+    <input type="text" id="city" name="city" placeholder="type city here..." required><br><br>
+    <input type="text" id="stname" name="stname" placeholder="street name here..." required><br><br>
+    <input type="text" id="pcode" name="pcode" placeholder="postal code here..." required><br><br>
+    <!-- <input type="text" id="distname" name="distname" placeholder="District name here..." required><br><br>
+    <input type="text" id="localmunicpname" name="localmunicpname" placeholder="Local municipality name here..." required><br><br> -->
+    <input type="submit" value="Change">
+  </form> 
+
+</div>
+
+<!-- Script bellow hides or shows form to user to change address -->
+<script>
+  function toggle() {
+    var x = document.getElementById("form");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  </script>
+</body>
+</html>

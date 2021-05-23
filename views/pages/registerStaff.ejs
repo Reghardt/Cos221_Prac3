@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/sidebarPartial'); %>
+</header>
+
+<style>
+  /*style form*/
+  form{
+    padding-bottom: 60px;
+  }
+  /* style form input*/
+  form input[type=submit] {
+
+    background-color: #DE354C;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+
+</style>
+
+<h2 style="text-align: center; padding-bottom: 20px;">Register Staff member</h2>
+
+<form action="#">
+  <label for="fname"><b>First name:</b></label><br>
+  <input type="text" id="fname" name="fname" placeholder="type first name here..." value="" required><br>
+  <label for="lname"><b>Last name:</b></label><br>
+  <input type="text" id="lname" name="lname" placeholder="type last name here..." value="" required><br><br>
+  <label for="role"><b>Role:</b></label><br>
+  <input type="text" id="role" name="lname" placeholder="type role name here..." value="" required><br><br>
+  <label for="age"><b>age:</b></label><br>
+  <input type="text" id="age" name="age" placeholder="type age name here..." value="" required><br><br>
+  <p>Select gender:</p>
+  <label>
+    <input name="gender" type="radio"  value="male" />
+    <span>Male</span>
+  </label>
+  <br>
+  <label>
+    <input name="gender" type="radio"  value="female" />
+    <span>female</span>
+  </label>
+  <br>
+  <label for="idnumber"><b>ID number:</b></label><br>
+  <input type="text" id="idnumber" name="idnumber" placeholder="type id number here..." required><br><br>
+  <label for="address"><b>Address:</b></label><br>
+  <input type="text" id="city" name="city" placeholder="type city/area" required><br><br>
+  <input type="text" id="stname" name="stname" placeholder="street name here..." required><br><br>
+  <input type="text" id="pcode" name="pcode" placeholder="postal code here..." required><br><br>
+  <input type="submit" value="Submit">
+</form> 
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+</body>

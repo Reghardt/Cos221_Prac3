@@ -81,16 +81,40 @@ app.get('/home', function(request, response) {
 });
 
 
- // about page
- app.get('/sidebar', function(req, res) {
-    res.render('pages/sidebar');
+ // voterMain page
+ app.get('/voterMain', function(req, res) {
+    res.render('pages/voterMain');
   });
 
-   // about page
- app.get('/test', function(req, res) {
-    res.render('pages/test');
+   // register staff page
+ app.get('/registerStaff', function(req, res) {
+    res.render('pages/registerStaff');
   });
 
+     // register candidate page
+ app.get('/registerCandidate', function(req, res) {
+    res.render('pages/registerCandidate');
+  });
+
+    // register party page
+ app.get('/registerParty', function(req, res) {
+    res.render('pages/registerParty');
+  });
+
+      // update voting district page
+ app.get('/updateDistrict', function(req, res) {
+    res.render('pages/updateDistrict');
+  });
+
+  // login page
+  app.get('/login', function(req, res) {
+    res.render('pages/login');
+  });
+
+  // ballot page
+  app.get('/ballot', function(req, res) {
+    res.render('pages/ballot');
+  });
 
 app.get('/register', function (req, res) {
     res.render('pages/register');

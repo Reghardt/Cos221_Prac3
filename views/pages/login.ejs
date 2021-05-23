@@ -2,25 +2,56 @@
 <html lang="en">
 <head>
   <%- include('../partials/head'); %>
+
+  <style>
+
+ /*Center container which has the form*/
+    .jumbotron{
+      background-color:#385B93;
+      color: #fff;
+      margin: auto;
+    width: 50%;
+    }
+
+      /* style form input*/
+  .btn {
+    background-color: #56BAEC;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 100%;
+}
+  </style>
 </head>
 <body class="container">
 
 <header>
-  <%- include('../partials/header'); %>
+  <!-- <%- include('../partials/header'); %> -->
 </header>
 
 <main>
   <div class="jumbotron">
     <div class="container">
-        <h2>Login:</h2>
+        <h2 class="text-center">Login</h2>
         <form action="auth" method="POST">
           <div class="form-group">
-            <label for="username">Email:</label>
-            <input type="username" class="form-control"  placeholder="Enter username" name="username">
+            <label for="username">Name:</label>
+            <input type="text" class="form-control"  placeholder="Enter first name" name="fname" required>
+          </div>
+          <div class="form-group">
+            <label for="username">Surname:</label>
+            <input type="text" class="form-control"  placeholder="Enter username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label for="username">ID number:</label>
+            <input type="text" class="form-control"  placeholder="Enter first name" name="idnumber" required>
           </div>
           <div class="form-group">
             <label for="pasword">Password:</label>
-            <input type="password" class="form-control" placeholder="Enter password" name="password">
+            <input type="password" class="form-control" placeholder="Enter password" name="password" required>
           </div>
           <div class="checkbox">
             <label><input type="checkbox" name="remember"> Remember me</label>
@@ -33,10 +64,10 @@
                 <option>4</option>
               </select>
           </div>
-          <button type="submit" class="btn btn-info">Submit</button>
+          <button type="submit" class="btn btn-info">Login</button>
           <div></div><br>
           <a href="/register" class="btn btn-info" role="button">Register</a>
-          <p><%= tagline %></p>
+
 
         </form>
       </div>

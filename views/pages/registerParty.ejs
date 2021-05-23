@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/sidebarPartial'); %>
+</header>
+
+<style>
+  /*style form*/
+  form{
+    padding-bottom: 60px;
+  }
+  /* style form input*/
+  form input[type=submit] {
+
+    background-color: #DE354C;;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 100%;
+  }
+
+
+</style>
+
+<h2 style="text-align: center; padding-bottom: 20px;">Register Party</h2>
+
+<form action="#">
+  <label for="partyname"><b>Party name:</b></label><br>
+  <input type="text" id="partyname" name="fname" placeholder="Type party name here" required><br>
+  <input type="submit" value="register">
+</form> 
+
+<footer style=" margin: auto; width: 50%; position:absolute; bottom: 0%;">
+  <%- include('../partials/footer'); %>
+</footer>
+</body>

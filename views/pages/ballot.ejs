@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+    <!-- This is to allow materialize css -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!-- End of materialize css needed files -->
+
+</head>
+<body class="container">
+
+
+<style>
+
+    /* add scroll to list of candidates*/
+    .collection{
+        overflow-y: scroll;
+        height: 400px;
+    }
+
+    /* ballot paper title style*/
+    h4{
+        background-color: #385B93;
+        padding: 4px;
+        color: #fff;
+    }
+
+     /* button to cast vote style*/
+    .bt {
+       background-color: #56BAEC;
+       border: none;
+       color: white;
+       padding: 16px 32px;
+       text-decoration: none;
+       margin: 4px 2px;
+       cursor: pointer;
+       width: 100%;
+   }
+   .bt:hover{
+    background-color: #1d96d3;
+   }
+
+   .center{
+       text-align: center;
+       display: block;
+   }
+
+</style>
+
+<h2 style="text-align: center; padding-bottom: 20px;">Ballots</h2>
+<i class="center">Cast your vote freely!</i>
+
+
+<!-- List of candidates to vote for -->
+<!-- This currently has mock data and repeated list items simply for dev purposes -->
+<form action ="#" method="">
+
+    <!-- First vote List -->
+    <h4>First vote</h4>
+    <ul class="collection with-header">
+        <li class="collection-item">
+            <span class="title"><b>Candidate's name</b></span>
+            <p>Position <br>
+                Party
+            </p>
+            <!-- vote radio button -->
+            <label>
+                <input name="vote1" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+        </li>
+
+        <li class="collection-item">
+            <span class="title"><b>Candidate's name</b></span>
+            <p>Position <br>
+             Party
+            </p>
+              <!-- vote radio button -->
+              <label>
+                <input name="vote1" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+        </li>
+
+        <li class="collection-item">
+            <span class="title"><b>Candidate's name</b></span>
+            <p>Position <br>
+                Party
+            </p>
+              <!-- vote radio button -->
+              <label>
+                <input name="vote1" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+        </li>
+
+        <li class="collection-item">
+            <span class="title"><b>Candidate's name</b></span>
+            <p>Position <br>
+                Party
+            </p>
+              <!-- vote radio button -->
+              <label>
+                <input name="vote1" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+        </li>
+
+      </ul>
+    
+      <!-- Second vode List -->
+
+      <h4>Second vote</h4>
+      <ul class="collection with-header">
+          <li class="collection-item">
+              <span class="title"><b>Candidate's name</b></span>
+              <p>Position <br>
+                  Party
+              </p>
+                <!-- vote radio button -->
+            <label>
+                <input name="vote2" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+          </li>
+  
+          <li class="collection-item">
+              <span class="title"><b>Candidate's name</b></span>
+              <p>Position <br>
+               Party
+              </p>
+                   <!-- vote radio button -->
+            <label>
+                <input name="vote2" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+          </li>
+  
+          <li class="collection-item">
+              <span class="title"><b>Candidate's name</b></span>
+              <p>Position <br>
+                  Party
+              </p>
+                   <!-- vote radio button -->
+            <label>
+                <input name="vote2" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+          </li>
+  
+          <li class="collection-item">
+              <span class="title"><b>Candidate's name</b></span>
+              <p>Position <br>
+                  Party
+              </p>
+                <!-- vote radio button -->
+            <label>
+                <input name="vote2" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+          </li>
+  
+        </ul>
+
+
+        <!-- Third Vote List is shown based voter district council -->
+    
+        <h4>Third vote</h4>
+        <ul class="collection with-header">
+            <li class="collection-item">
+                <span class="title"><b>Candidate's name</b></span>
+                <p>Position <br>
+                    Party
+                </p>
+                <!-- vote radio button -->
+                <label>
+                    <input name="vote3" type="radio"  value="candidate_name" />
+                    <span>select if your choice</span>
+                </label>
+            </li>
+    
+            <li class="collection-item">
+                <span class="title"><b>Candidate's name</b></span>
+                <p>Position <br>
+                 Party
+                </p>
+                <!-- vote radio button -->
+            <label>
+                <input name="vote3" type="radio"  value="candidate_name" />
+                <span>select if your choice</span>
+              </label>
+            </li>
+    
+            <li class="collection-item">
+                <span class="title"><b>Candidate's name</b></span>
+                <p>Position <br>
+                    Party
+                </p>
+                <!-- vote radio button -->
+                <label>
+                    <input name="vote3" type="radio"  value="candidate_name" />
+                    <span>select if your choice</span>
+                </label>
+            </li>
+    
+            <li class="collection-item">
+                <span class="title"><b>Candidate's name</b></span>
+                <p>Position <br>
+                    Party
+                </p>
+                <!-- vote radio button -->
+                <label>
+                    <input name="vote3" type="radio"  value="candidate_name" />
+                    <span>select if your choice</span>
+                </label>
+            </li>
+    
+          </ul>
+
+        <br>
+      <input class="bt" type="submit" value="Cast Votes">
+</form>
+
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+</body>
