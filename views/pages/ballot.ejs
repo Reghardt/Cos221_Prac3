@@ -54,7 +54,7 @@
 
 <!-- List of candidates to vote for -->
 <!-- This currently has mock data and repeated list items simply for dev purposes -->
-<form action ="#" method="">
+<form action ="voterCastAllVotes" method="post">
 
     <!-- First vote List -->
     <h4>First vote</h4>
@@ -71,152 +71,59 @@
               </label>
         </li>
 
-        <li class="collection-item">
-            <span class="title"><b>Candidate's name</b></span>
-            <p>Position <br>
-             Party
-            </p>
-              <!-- vote radio button -->
-              <label>
-                <input name="vote1" type="radio"  value="candidate_name" />
-                <span>select if your choice</span>
-              </label>
-        </li>
 
-        <li class="collection-item">
-            <span class="title"><b>Candidate's name</b></span>
-            <p>Position <br>
-                Party
-            </p>
-              <!-- vote radio button -->
-              <label>
-                <input name="vote1" type="radio"  value="candidate_name" />
-                <span>select if your choice</span>
-              </label>
-        </li>
-
-        <li class="collection-item">
-            <span class="title"><b>Candidate's name</b></span>
-            <p>Position <br>
-                Party
-            </p>
-              <!-- vote radio button -->
-              <label>
-                <input name="vote1" type="radio"  value="candidate_name" />
-                <span>select if your choice</span>
-              </label>
-        </li>
+        
 
       </ul>
     
-      <!-- Second vode List -->
+      <!-- Second vode List----------------------------------------------------------------------------------------------- -->
 
       <h4>Second vote</h4>
       <ul class="collection with-header">
-          <li class="collection-item">
-              <span class="title"><b>Candidate's name</b></span>
+        <% vote2Parties.forEach(function(parties) { %>
+            <li class="collection-item">
+              <span class="title"><b><%= parties.polPartyNameFK %> Party</b></span>
               <p>Position <br>
                   Party
               </p>
                 <!-- vote radio button -->
             <label>
-                <input name="vote2" type="radio"  value="candidate_name" />
+                <input name="vote2" type="radio"  value="<%= parties.polPartyNameFK %>" />
                 <span>select if your choice</span>
               </label>
-          </li>
-  
-          <li class="collection-item">
-              <span class="title"><b>Candidate's name</b></span>
-              <p>Position <br>
-               Party
-              </p>
-                   <!-- vote radio button -->
-            <label>
-                <input name="vote2" type="radio"  value="candidate_name" />
-                <span>select if your choice</span>
-              </label>
-          </li>
-  
-          <li class="collection-item">
-              <span class="title"><b>Candidate's name</b></span>
-              <p>Position <br>
-                  Party
-              </p>
-                   <!-- vote radio button -->
-            <label>
-                <input name="vote2" type="radio"  value="candidate_name" />
-                <span>select if your choice</span>
-              </label>
-          </li>
-  
-          <li class="collection-item">
-              <span class="title"><b>Candidate's name</b></span>
-              <p>Position <br>
-                  Party
-              </p>
-                <!-- vote radio button -->
-            <label>
-                <input name="vote2" type="radio"  value="candidate_name" />
-                <span>select if your choice</span>
-              </label>
-          </li>
+            </li>
+    
+          <% }); %>
+          
   
         </ul>
 
 
-        <!-- Third Vote List is shown based voter district council -->
+        <!-- Third Vote List is shown based voter district council---------------------------------------------------------------------- -->
     
+        <% if (vote3Parties != null) { %>
         <h4>Third vote</h4>
         <ul class="collection with-header">
-            <li class="collection-item">
-                <span class="title"><b>Candidate's name</b></span>
-                <p>Position <br>
-                    Party
-                </p>
-                <!-- vote radio button -->
+            <% vote3Parties.forEach(function(parties) { %>
+                <li class="collection-item">
+                  <span class="title"><b><%= parties.polPartyNameFK %> Party</b></span>
+                  <p>Position <br>
+                      Party
+                  </p>
+                    <!-- vote radio button -->
                 <label>
-                    <input name="vote3" type="radio"  value="candidate_name" />
+                    <input name="vote3" type="radio"  value="<%= parties.polPartyNameFK %>" />
                     <span>select if your choice</span>
-                </label>
-            </li>
-    
-            <li class="collection-item">
-                <span class="title"><b>Candidate's name</b></span>
-                <p>Position <br>
-                 Party
-                </p>
-                <!-- vote radio button -->
-            <label>
-                <input name="vote3" type="radio"  value="candidate_name" />
-                <span>select if your choice</span>
-              </label>
-            </li>
-    
-            <li class="collection-item">
-                <span class="title"><b>Candidate's name</b></span>
-                <p>Position <br>
-                    Party
-                </p>
-                <!-- vote radio button -->
-                <label>
-                    <input name="vote3" type="radio"  value="candidate_name" />
-                    <span>select if your choice</span>
-                </label>
-            </li>
-    
-            <li class="collection-item">
-                <span class="title"><b>Candidate's name</b></span>
-                <p>Position <br>
-                    Party
-                </p>
-                <!-- vote radio button -->
-                <label>
-                    <input name="vote3" type="radio"  value="candidate_name" />
-                    <span>select if your choice</span>
-                </label>
-            </li>
-    
-          </ul>
+                  </label>
+                </li>
+        
+              <% }); %>
+              
+      
+            </ul>
+            <%} else { %>
+            <!-- nothing-->
+            <% } %>
 
         <br>
       <input class="bt" type="submit" value="Cast Votes">

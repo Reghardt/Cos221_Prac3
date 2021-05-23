@@ -21,16 +21,22 @@
 <body>
 
 <div class="container">
-  <h4 style="color: #fff;"><b>Welcome VoterName</b></h4>
+  <h4 style="color: #fff;"><b>Welcome <%= name %> <%= surname %> </b></h4>
   <ul class="collection">
     <li class="collection-item avatar">
       <span class="title">Voter name & Surname</span>
-      <p><b>Voter status:</b> Not voted</p>
-      <a class="changeAddLink" onclick="toggle()"> Change address</a>
+      <p><b>Voter status:</b>
+        <% if (voted > 0) { %>
+          <b style="color:green" >Has Voted</b>
+          <%} else { %>
+          <b style="color:red">Not Voted</b> 
+          <% } %>
+      </p>
+      <a class="changeAddLink" onclick="toggle()"> Change Details</a>
       <br>
       <a href="/ballot"> Cast Vote</a>
       <br>
-      <a href="#"> log out</a>
+      <a href="/logout"> log out</a>
     </li>
   </ul>
 
