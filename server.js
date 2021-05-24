@@ -66,81 +66,82 @@ app.post('/auth', function(request, response) {
 
 
 // generate munParty Table -- helper
-app.get('/generateMidTables', function(req, res) {
-
+app.get('/generateMidTables', function(req, response) {
+	if(req.session.staff && req.session.staffID)
+	{
 	
-    connection.query('SELECT * FROM municipality', function(error, munResults, fields) {
-		if (munResults.length > 0) {
+		connection.query('SELECT * FROM municipality', function(error, munResults, fields) {
+			if (munResults.length > 0) {
 
-			let allMunicipalities;
-			let allParties;
+				let allMunicipalities;
+				let allParties;
 
-			allMunicipalities = munResults;
+				allMunicipalities = munResults;
 
-			connection.query('SELECT * FROM politicalParty', function(error, parResults, fields) {
-				allParties = parResults;
-				
-				for(mun in allMunicipalities)
-				{
-					for(par in allParties)
+				connection.query('SELECT * FROM politicalParty', function(error, parResults, fields) {
+					allParties = parResults;
+					
+					for(mun in allMunicipalities)
 					{
-						connection.query('INSERT INTO elections.munParty (munNameFK, polPartyNameFK, votes) VALUES (?, ?, ?);', [allMunicipalities[mun].municipalityName, allParties[par].PartyName, 0 ], function(error, results) {
-							if (error) {
-								console.log("Error creating munParty: Exists");
-
-							}
-							else
-							{
-								console.log("Success inserting mun");
-
-							}
-						});
+						for(par in allParties)
+						{
+							connection.query('INSERT INTO elections.munParty (munNameFK, polPartyNameFK, votes) VALUES (?, ?, ?);', [allMunicipalities[mun].municipalityName, allParties[par].PartyName, 0 ], function(error, results) {
+								if (error) {
+									console.log("Error creating munParty: Exists");
+								}
+								else
+								{
+									console.log("Success inserting mun");
+								}
+							});
+						}
 					}
-				}
 
-			});
-		} else {
-			response.send('an error occurred in reteving the municipalities');
-		}			
-
-	});
-	//for dist parties table
-	connection.query('SELECT * FROM District', function(error, distResults, fields) {
-		if (distResults.length > 0) {
-			
-			let allDistMunicipalities;
-			let allParties;
-
-			allDistMunicipalities = distResults;
-
-			connection.query('SELECT * FROM politicalParty', function(error, parResults, fields) {
-				allParties = parResults;
+				});
+			} else {
+				response.end('an error occurred in reteving the municipalities');
+			}
 				
-				for(dist in allDistMunicipalities)
-				{
-					for(par in allParties)
+
+		});
+		//for dist parties table
+		connection.query('SELECT * FROM District', function(error, distResults, fields) {
+			if (distResults.length > 0) {
+				
+				let allDistMunicipalities;
+				let allParties;
+
+				allDistMunicipalities = distResults;
+
+				connection.query('SELECT * FROM politicalParty', function(error, parResults, fields) {
+					allParties = parResults;
+					
+					for(dist in allDistMunicipalities)
 					{
-						connection.query('INSERT INTO elections.distParty (munNameFK, distPartyNameFK, votes) VALUES (?, ?, ?);', [allDistMunicipalities[dist].municipalityNameFK, allParties[par].PartyName, 0 ], function(error, results) {
-							if (error) {
-								console.log("Error creating distParty: Exists");
+						for(par in allParties)
+						{
+							connection.query('INSERT INTO elections.distParty (munNameFK, distPartyNameFK, votes) VALUES (?, ?, ?);', [allDistMunicipalities[dist].municipalityNameFK, allParties[par].PartyName, 0 ], function(error, results) {
+								if (error) {
+									console.log("Error creating distParty: Exists");
 
-							}
-							else
-							{
-								console.log("Success inserting dist");
+								}
+								else
+								{
+									console.log("Success inserting dist");
 
-							}
-						});
+								}
+							});
+						}
 					}
-				}
 
-			});
-		} else {
-			response.send('an error occurred in reteving the district municipalities');
-		}			
+				});
+			} else {
+				response.end('an error occurred in reteving the district municipalities');
+			}			
 
-	});
-  });
+		});
+		response.end('Table generation in progress..');
+}});
 
  // voterMain page
  app.get('/voterMain', function(req, res) {
@@ -167,17 +168,131 @@ app.get('/generateMidTables', function(req, res) {
 
    // register staff page
  app.get('/registerStaff', function(req, res) {
-    res.render('pages/registerStaff');
+	if(req.session.staff && req.session.staffID)
+	{
+		res.render('pages/registerStaff');
+	}
+	else
+	{
+		res.end("not logged in as staff");
+	}
+    
   });
 
      // register candidate page
  app.get('/registerCandidate', function(req, res) {
-    res.render('pages/registerCandidate');
+	if(req.session.staff && req.session.staffID)
+	{
+		connection.query('SELECT * FROM elections.municipality;', function(error, munResults, fields) {
+			if (munResults.length > 0 ) 
+			{
+				connection.query('SELECT * FROM elections.politicalParty;', function(error, polPartyResults, fields) {
+					if (polPartyResults.length > 0 ) 
+					{
+						res.render('pages/registerCandidate', {
+							municipalities: munResults,
+							polParties: polPartyResults
+						});
+					}
+				});
+			}
+		});
+		
+	}
+	else
+	{
+		res.end("not logged in as staff");
+	}
+
+    
+  });
+
+  app.post('/registerCandidateAuth', function(req, res) {
+	if(req.session.staff && req.session.staffID)
+	{
+		var fname = req.body.fname;
+		var lname = req.body.lname;
+		var partyName = req.body.partyName;
+		var idNumber = req.body.idNumber;
+		var municName = req.body.municName;
+		var role = req.body.role;
+
+		console.log(fname);
+		console.log(lname);
+		console.log(partyName);
+		console.log(idNumber);
+		console.log(municName);
+		connection.query('SELECT * FROM elections.voter where id = ? ;', [idNumber], function(error, voterRes, fields) 
+		{
+			if(voterRes.length > 0)
+			{
+				connection.query('INSERT INTO elections.runningCandidate (runningCandidateID, nrOfVotes, runningIn, role, partyName) VALUES (?, ?, ?, ?, ?);',[idNumber,0,municName,role, partyName], function(inError, insertCandidateRes, fields) 
+				{
+					if(inError)
+					{
+						res.end("Could not register candidate");
+					}
+					else
+					{
+						res.end("Successfully registered candidate");
+					}
+					
+					
+				});
+				
+			}
+			else
+			{
+				res.end("error: not registered as voter");
+			}
+		});
+
+
+	}
+	else
+	{
+		res.end("not logged in as staff");
+	}
+
+    
   });
 
     // register party page
  app.get('/registerParty', function(req, res) {
-    res.render('pages/registerParty');
+	if(req.session.staff && req.session.staffID)
+	{
+		res.render('pages/registerParty');
+	}
+	else
+	{
+		res.end("not logged in as admin");
+	}
+  });
+
+app.post('/registerPartyAuth', function(req, res) {
+	if(req.session.staff && req.session.staffID)
+	{
+		var partyName = req.body.partyName;
+		console.log(partyName);
+		connection.query('INSERT INTO elections.politicalParty (PartyName) VALUES (?);',[partyName], function(inError, insertPartyRes, fields) 
+		{
+			if(inError)
+			{
+				res.end("Could not create party");
+			}
+			else
+			{
+				//res.end("Successfully created party \n Generating tables...");
+				res.redirect('/generateMidTables');
+			}
+			
+			
+		});
+	}
+	else
+	{
+		res.end("not logged in as admin");
+	}
   });
 
       // update voting district page
@@ -188,6 +303,92 @@ app.get('/generateMidTables', function(req, res) {
   // login page
   app.get('/login', function(req, res) {
     res.render('pages/login');
+  });
+
+  // login page staff members
+  app.get('/loginStaffMember', function(req, res) {
+    res.render('pages/loginStaffMember');
+  });
+
+  
+
+  // login page staff members
+  app.post('/authStaffMember', function(req, res) {
+	var firstname = req.body.firstname;
+	var surname = req.body.surname;
+	var idNumber = req.body.idnumber;
+	var password = req.body.password;
+
+	console.log(firstname);
+	console.log(surname);
+	console.log(idNumber);
+	console.log(password);
+
+	connection.query('SELECT * FROM elections.staff where id = ? AND fname = ? AND surname = ? AND password = ? ;',[idNumber,firstname, surname, password], function(error, results, fields) {
+		if (results.length > 0) 
+		{
+			req.session.staff = true;
+			req.session.staffID = idNumber;
+			res.redirect('/registerStaff');
+		}
+		else
+		{
+			res.end("You are not a staff member");
+		}
+	});
+
+
+    
+  });
+
+  
+
+  app.post('/registerStaffAuth', function(req, res)
+  {
+	if(req.session.staff && req.session.staffID)
+	{
+		var fname = req.body.fname;
+		var lname = req.body.lname;
+		var role = req.body.role;
+		var idNumber = req.body.idNumber;
+		var password = req.body.password;
+
+		console.log(fname);
+		console.log(lname);
+		console.log(idNumber);
+		console.log(password);
+		console.log(role);
+
+		connection.query('SELECT * FROM elections.voter where id = ? ;',[idNumber], function(error, results, fields) {
+			if(!results.length > 0)
+			{
+				
+				connection.query('INSERT INTO elections.staff (id, fname, surname, password, role) VALUES (?, ?, ?, ?, ?);',[idNumber,fname,lname,password,role], function(inError, insertRes, fields) {
+					if (inError) {
+						console.log("Error inserting Staff member");
+						res.end("Error inserting Staff member");
+
+					}
+					else
+					{
+						console.log("Success inserting Staff Member");
+						res.end("success inserting Staff member");
+					}
+				
+				});
+			}
+			else
+			{
+				console.log("Already registered as a voter");
+				res.end("Already registered as a voter");
+			}
+		
+		});
+	}
+	else
+	{
+		res.end("not logged in as admin");
+	}
   });
 
   // logout and show login page
@@ -206,30 +407,65 @@ app.get('/generateMidTables', function(req, res) {
 			if (results.length > 0) {
 				munIDofVoter = results[0].MunicipalityId;
 				console.log(munIDofVoter);
-				connection.query('SELECT polPartyNameFK FROM elections.voter as vot JOIN elections.munParty as mp ON  vot.municipalityID = mp.munNameFK where municipalityID = ? ;',[munIDofVoter], function(error, munPartyPairResults, fields) {
+				connection.query('SELECT polPartyNameFK FROM elections.voter as vot JOIN elections.munParty as mp ON  vot.municipalityID = mp.munNameFK where municipalityID = ? AND id = ? ;',[munIDofVoter, req.session.userID], function(error, munPartyPairResults, fields) {
 					if (munPartyPairResults.length > 0) {
 
 						console.log(munPartyPairResults);
 						
 						connection.query('SELECT munNameFK FROM elections.municipality as mun left JOIN elections.distParty as dp ON  mun.municipalityName = dp.munNameFK where municipalityName = ? ;',[munIDofVoter], function(error, distPartyPairResults, fields) {
-							if (distPartyPairResults.length > 0 ) {
-
-								console.log(distPartyPairResults);
-								console.log(distPartyPairResults[0].munNameFK);
-								if(distPartyPairResults[0].munNameFK != null)
+							if (distPartyPairResults.length > 0 ) 
+							{
+								//get candidates that can be voted for in the voters municipality
+								connection.query('SELECT firstname, surname, role, partyName, runningCandidateID FROM elections.voter as vot JOIN elections.runningCandidate as rc on vot.municipalityID = rc.runningIn and vot.id = rc.runningCandidateID where runningIn = ? ;',[munIDofVoter], function(canVoteErr, candidatesInMyMunicRes, fields) 
 								{
-									res.render('pages/ballot', {
-										vote2Parties: munPartyPairResults,
-										vote3Parties: munPartyPairResults
-									});
-								}
-								else
-								{
-									res.render('pages/ballot', {
-										vote2Parties: munPartyPairResults,
-										vote3Parties: null
-									});
-								}
+									if(candidatesInMyMunicRes.length > 0)
+									{
+										console.log(candidatesInMyMunicRes); //candidates I can vote for in my munic
+										console.log(distPartyPairResults);	//parties I can vote for in my minic
+										console.log(distPartyPairResults[0].munNameFK); //am I in a metropolitan area
+										if(distPartyPairResults[0].munNameFK != null)
+										{
+											res.render('pages/ballot', {
+												vote1Candidates: candidatesInMyMunicRes,
+												vote2Parties: munPartyPairResults,
+												vote3Parties: munPartyPairResults
+											});
+										}
+										else
+										{
+											res.render('pages/ballot', {
+												vote1Candidates: candidatesInMyMunicRes,
+												vote2Parties: munPartyPairResults,
+												vote3Parties: null
+											});
+										}
+										
+									}
+									else
+									{	
+										console.log(candidatesInMyMunicRes); //candidates I can vote for in my munic
+										console.log(distPartyPairResults);	//parties I can vote for in my minic
+										console.log(distPartyPairResults[0].munNameFK); //am I in a metropolitan area
+										if(distPartyPairResults[0].munNameFK != null)
+										{
+											res.render('pages/ballot', {
+												vote1Candidates: candidatesInMyMunicRes,
+												vote2Parties: munPartyPairResults,
+												vote3Parties: munPartyPairResults
+											});
+										}
+										else
+										{
+											res.render('pages/ballot', {
+												vote1Candidates: candidatesInMyMunicRes,
+												vote2Parties: munPartyPairResults,
+												vote3Parties: null
+											});
+										}
+									}
+									
+								});
+								
 								
 
 							}
@@ -257,11 +493,13 @@ app.get('/generateMidTables', function(req, res) {
   app.post('/voterCastAllVotes', function(req, response) {
 	if(req.session.loggedin && req.session.userID)
 	{
+		var V1 = req.body.vote1;
 		var V2 = req.body.vote2;
 		var V3 = req.body.vote3;
+		console.log("vote 1 received " + V1);
 		console.log("vote 2 received " + V2);
 		console.log("vote 3 received " + V3);
-
+		//TODO: update nr of votes for canidate, 
 		connection.query('update elections.voter SET hasVoted = 1 Where voter.id = ?;', [req.session.userID], function(error, results) {
 			if (error) {
 				console.log("Error updated hasVoted");
@@ -269,6 +507,7 @@ app.get('/generateMidTables', function(req, res) {
 			else
 			{
 				console.log("Success updating hasVoted");
+				response.redirect('/voterMain');
 			}
 		});
 	}

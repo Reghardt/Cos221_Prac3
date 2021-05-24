@@ -31,34 +31,35 @@
 
 <h2 style="text-align: center; padding-bottom: 20px;">Register candidate</h2>
 
-<form action="#">
+<form action="registerCandidateAuth" method = "post">
   <label for="fname"><b>First name:</b></label><br>
   <input type="text" id="fname" name="fname" placeholder="type first name here..." value="" required><br>
   <label for="lname"><b>Last name:</b></label><br>
   <input type="text" id="lname" name="lname" placeholder="type last name here..."  value="" required><br><br>
+  
+  <label for="role"><b>Candidate Role:</b></label><br>
+  <input type="text" id="role" name="role" placeholder="type candidate role here..." value="" required><br><br>
+  
+  
+
+  <br>
+  <label for="idNumber"><b>ID number:</b></label><br>
+  <input type="text" id="idNumber" name="idNumber" placeholder="type id number here..." required><br><br>
+  
   <label for="party"><b>Party name:</b></label><br>
-  <input type="text" id="pname" name="pname" placeholder="type party name here..." value="" required><br><br>
-  <label for="age"><b>age:</b></label><br>
-  <input type="text" id="age" name="age" placeholder="type age name here..."  value="" required><br><br>
-  <p>Select gender:</p>
-  <label>
-    <input name="gender" type="radio"  value="male" />
-    <span>Male</span>
-  </label>
-  <br>
-  <label>
-    <input name="gender" type="radio"  value="female" />
-    <span>female</span>
-  </label>
-  <br>
-  <label for="idnumber"><b>ID number:</b></label><br>
-  <input type="text" id="idnumber" name="idnumber" placeholder="type id number here..." required><br><br>
-  <label for="address"><b>Address:</b></label><br>
-  <input type="text" id="city" name="city" placeholder="type city here..." required><br><br>
-  <input type="text" id="stname" name="stname" placeholder="street name here..." required><br><br>
-  <input type="text" id="pcode" name="pcode" placeholder="postal code here..." required><br><br>
-  <input type="text" id="distname" name="distname" placeholder="District name here..." required><br><br>
-  <input type="text" id="localmunicpname" name="localmunicpname" placeholder="Local municipality name here..." required><br><br>
+  <select class="form-control" id="sel1" name="partyName">
+    <% polParties.forEach(function(party) { %>
+        <option><%= party.PartyName %></option>>
+    <% }); %>
+  </select>
+  
+  <label for="municName"><b>Municipality to run in:</b></label><br>
+  <select class="form-control" id="sel2" name="municName">
+    <% municipalities.forEach(function(munic) { %>
+        <option><%= munic.municipalityName %></option>>
+    <% }); %>
+  </select>
+  
   <input type="submit" value="Submit">
 </form> 
 

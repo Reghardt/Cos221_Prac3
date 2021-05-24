@@ -57,19 +57,22 @@
 <form action ="voterCastAllVotes" method="post">
 
     <!-- First vote List -->
-    <h4>First vote</h4>
+    <h4>First vote: Local Representative</h4>
     <ul class="collection with-header">
+      <% vote1Candidates.forEach(function(candid) { %>
         <li class="collection-item">
-            <span class="title"><b>Candidate's name</b></span>
-            <p>Position <br>
-                Party
-            </p>
+          <span class="title"><b> Name: <%= candid.firstname %> <%= candid.surname %></b></span>
+          <p>Position: <%= candid.role %><br>
+              Party: <%= candid.partyName %>
+          </p>
             <!-- vote radio button -->
-            <label>
-                <input name="vote1" type="radio"  value="candidate_name" />
-                <span>select if your choice</span>
-              </label>
+        <label>
+            <input name="vote1" type="radio"  value="<%= candid.runningCandidateID %>" />
+            <span>select if your choice</span>
+          </label>
         </li>
+
+      <% }); %>
 
 
         
@@ -78,7 +81,7 @@
     
       <!-- Second vode List----------------------------------------------------------------------------------------------- -->
 
-      <h4>Second vote</h4>
+      <h4>Second vote: Municipal Council</h4>
       <ul class="collection with-header">
         <% vote2Parties.forEach(function(parties) { %>
             <li class="collection-item">
@@ -102,7 +105,7 @@
         <!-- Third Vote List is shown based voter district council---------------------------------------------------------------------- -->
     
         <% if (vote3Parties != null) { %>
-        <h4>Third vote</h4>
+        <h4>Third vote: District Council</h4>
         <ul class="collection with-header">
             <% vote3Parties.forEach(function(parties) { %>
                 <li class="collection-item">

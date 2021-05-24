@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+
+  <style>
+
+ /*Center container which has the form*/
+    .jumbotron{
+      background-color:#385B93;
+      color: #fff;
+      margin: auto;
+    width: 50%;
+    }
+
+      /* style form input*/
+  .btn {
+    background-color: #56BAEC;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 100%;
+}
+  </style>
+</head>
+<body class="container">
+
+<header>
+  <!-- <%- include('../partials/header'); %> -->
+</header>
+
+<main>
+  <div class="jumbotron">
+    <div class="container">
+        <h2 class="text-center">IEC Staff Login</h2>
+        <form action="authStaffMember" method="POST">
+          <div class="form-group">
+            <label for="firstname">Name:</label>
+            <input type="text" class="form-control"  placeholder="Enter first name" name="firstname" required>
+          </div>
+          <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input type="text" class="form-control"  placeholder="Enter surname" name="surname" required>
+          </div>
+          <div class="form-group">
+            <label for="idnumber">ID number:</label>
+            <input type="text" class="form-control"  placeholder="Enter ID Number" name="idnumber" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" placeholder="Enter password" name="password" required>
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+          </div>
+
+          <button type="submit" class="btn btn-info">Login</button>
+          <div></div><br>
+          <!-- <a href="/register" class="btn btn-info" role="button">Register</a> -->
+
+
+        </form>
+      </div>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
