@@ -401,10 +401,23 @@ app.post('/registerPartyAuth', function(req, res) {
   app.get('/ballot', function(req, res) {
 	if(req.session.loggedin && req.session.userID)
 	{
+		
+
+
+
 		console.log("has session");
 		let munIDofVoter;
-		connection.query('select MunicipalityId	from elections.voter where id = ?',[req.session.userID], function(error, results, fields) {
-			if (results.length > 0) {
+		connection.query('select MunicipalityId, hasVoted from elections.voter where id = ?',[req.session.userID], function(error, results, fields) {
+			if (results.length > 0) 
+			{
+				if(results[0].hasVoted)
+				{
+					res.redirect('/voterMain');
+				}
+				else
+				{
+
+				
 				munIDofVoter = results[0].MunicipalityId;
 				console.log(munIDofVoter);
 				connection.query('SELECT polPartyNameFK FROM elections.voter as vot JOIN elections.munParty as mp ON  vot.municipalityID = mp.munNameFK where municipalityID = ? AND id = ? ;',[munIDofVoter, req.session.userID], function(error, munPartyPairResults, fields) {
@@ -477,6 +490,7 @@ app.post('/registerPartyAuth', function(req, res) {
 				});
 				
 			}
+		}
 		});
 
 
@@ -510,6 +524,57 @@ app.post('/registerPartyAuth', function(req, res) {
 				response.redirect('/voterMain');
 			}
 		});
+
+		connection.query('SELECT municipalityID FROM voter where id = ? ;', [req.session.userID], function(error, munNameRes, fields)
+		{
+			if (munNameRes.length > 0) 
+			{
+				console.log(munNameRes);
+				if(V1)
+				{
+					console.log("V1 Defined");
+					connection.query('UPDATE elections.runningCandidate SET nrOfVotes = nrOfVotes + 1 where runningCandidateID = ? ;', [V1], function(updateError, updateRes, fields)
+					{
+
+					});
+				}
+				else
+				{
+					console.log("V1 not Defined");
+				}
+
+				if(V2)
+				{
+					console.log("V2 Defined");
+					connection.query('UPDATE elections.munParty SET votes = votes + 1 where munNameFK = ? AND polPartyNameFK = ?;', [munNameRes[0].municipalityID,V2], function(updateError, updateRes, fields)
+					{
+
+					});
+				}
+				else
+				{
+					console.log("V2 not Defined");
+				}
+
+				if(V3)
+				{
+					console.log("V3 Defined");
+					connection.query('UPDATE elections.distParty SET votes = votes + 1 where munNameFK = ? AND distPartyNameFK = ?;', [munNameRes[0].municipalityID,V3], function(updateError, updateRes, fields)
+					{
+
+					});
+				}
+				else
+				{
+					console.log("V3 not Defined");
+				}
+				
+			}
+		});
+	}
+	else
+	{
+		res.end("please log in");
 	}
 	
 
