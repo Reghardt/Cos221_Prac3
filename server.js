@@ -35,10 +35,7 @@ app.get('/', function(req, res) {
 	  res.render('pages/login');
   });
   
-  // about page
-  app.get('/about', function(req, res) {
-    res.render('pages/about');
-  });
+
 
 
 app.post('/auth', function(request, response) {
